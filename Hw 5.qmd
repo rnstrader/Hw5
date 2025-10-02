@@ -6,6 +6,40 @@ editor: visual
 
 ## Read in the Data and Modify
 
+Using code from the provided file to import and merge both datasets.
+```{r}
+d1 <- read.table("student-mat.csv",sep=";",header=TRUE)
+d2 <- read.table("student-por.csv",sep=";",header=TRUE)
+
+d3 <- merge(d1,d2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+d3
+```
+
+Doing the same process but using tidyverse functions read_csv2 (semicolon seperated file) and inner_join. This leads to differences in how the rows are sorted, with the output data above having nicely ordered row arrangements for variables such as school, sex, and age. By comparison the output using tidyverse below is data that is not ordered with any variable other than school. Also the integer output variables above are instead of the data type double in the data output below, and for variables not included in the join parameters, two different columns are created in the dataset, differentiated by .x and .y appended to the end.
+```{r}
+library(tidyverse)
+school1 <- read_csv2("student-mat.csv")
+school2 <- read_csv2("student-por.csv")
+
+school <- inner_join(school1,school2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+school
+```
+
+Using inner_join to merge all variables other than G1, G2, G3, paid, and absences.
+```{r}
+school <- inner_join(school1,school2,by = names(school1)[!names(school1) %in% c("G1","G2", "G3", "paid", "absences")])
+school
+```
+
+Picking 4 categorical variables of interest (school, sex, address, and Pstatus) and converting these to factor variables using mutate.
+```{r}
+school <- school |> mutate(across(c("school", "sex", "address", "Pstatus"), as.factor))
+school
+```
+
+## Summarize the Data
+
+
 ```{r}
 
 ```
