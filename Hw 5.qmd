@@ -46,3 +46,6 @@ colSums(is.na(school))
 ```
 
 
+```{r}
+
+```
