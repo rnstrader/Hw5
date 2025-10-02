@@ -39,7 +39,10 @@ school
 
 ## Summarize the Data
 
-
+Checking how the data is stored and documenting all missing values in the data.
 ```{r}
-
+str(school)
+colSums(is.na(school))
 ```
+
+
