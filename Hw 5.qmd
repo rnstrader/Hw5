@@ -80,6 +80,7 @@ school |> ggplot(aes(x = sex, fill = school)) + geom_bar(position = "dodge") + l
 ## Numeric Variables
 
 Finding measures of center and spread for age, absences, and one G3 variable. Repeating to subset the data.
+One interesting thing revealed through the table is that it appears that female students have more absences on average than male students, despite having the same median, and the number of absences across each population is more spread out for women than for men.
 ```{r}
 school |> summarize(across(c("age", "absences.x", "absences.y", "G3.x"), list("mean" = mean, "median" = median, "SD" = sd), .names = "{.fn}_{.col}"))
 
