@@ -79,6 +79,13 @@ school |> ggplot(aes(x = sex, fill = school)) + geom_bar(position = "dodge") + l
 
 ## Numeric Variables
 
+Finding measures of center and spread for age, absences, and one G3 variable. Repeating to subset the data.
+```{r}
+school |> summarize(across(c("age", "absences.x", "absences.y", "G3.x"), list("mean" = mean, "median" = median, "SD" = sd), .names = "{.fn}_{.col}"))
+
+school |> group_by(sex) |> summarize(across(c("age", "absences.x", "absences.y", "G3.x"), list("mean" = mean, "median" = median, "SD" = sd), .names = "{.fn}_{.col}"))
+```
+
 
 ```{r}
 
