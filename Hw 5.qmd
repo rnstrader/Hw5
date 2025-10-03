@@ -54,3 +54,17 @@ table(school$sex)
 table(school$sex, school$school)
 table(school$sex, school$school, school$address)
 ```
+
+Two different ways to create a conditional two-way table, one using filter and the other subsetting a three-way table.
+```{r}
+schoolGP <- school |> filter(school == "GP")
+table(schoolGP$sex, schoolGP$Pstatus)
+
+threewayschool <- table(school$sex, school$school, school$Pstatus)
+threewayschool[,1,]
+```
+
+
+```{r}
+
+```
