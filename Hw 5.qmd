@@ -76,3 +76,10 @@ school |> ggplot(aes(x = sex)) + geom_bar(aes(fill = school)) + labs(title = "St
 
 school |> ggplot(aes(x = sex, fill = school)) + geom_bar(position = "dodge") + labs(title = "Student Population of Two Different Schools") + xlab("Sex") + ylab("Count")
 ```
+
+## Numeric Variables
+
+
+```{r}
+
+```
