@@ -64,6 +64,12 @@ threewayschool <- table(school$sex, school$school, school$Pstatus)
 threewayschool[,1,]
 ```
 
+Creating a two way contingency table using group_by and summarize. Afterwards the result is stretched using pivot_wider.
+```{r}
+twowayschool <- school |> group_by(school, sex) |> summarize(count = n()) 
+twowayschool |> pivot_wider(names_from = school, values_from = count)
+```
+
 
 ```{r}
 
