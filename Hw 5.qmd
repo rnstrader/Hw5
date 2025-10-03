@@ -45,7 +45,12 @@ str(school)
 colSums(is.na(school))
 ```
 
-
+Creating a one way, two way, and three way table for our previously chosen factor variables. 
+For table 1: 146 refers to the total number of males in this data set.
+For table 2: 134 refers to the subset of males that attend the school Gabriel Pereira.
+For table 3: 25 refers to number of male students that attend Gabriel Pereira who live in a rural area.
 ```{r}
-
+table(school$sex)
+table(school$sex, school$school)
+table(school$sex, school$school, school$address)
 ```
