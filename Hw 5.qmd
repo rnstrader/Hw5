@@ -70,7 +70,9 @@ twowayschool <- school |> group_by(school, sex) |> summarize(count = n())
 twowayschool |> pivot_wider(names_from = school, values_from = count)
 ```
 
-
+Creating a stacked bar graph and side-by-side bar graph.
 ```{r}
+school |> ggplot(aes(x = sex)) + geom_bar(aes(fill = school)) + labs(title = "Student Population of Two Different Schools") + xlab("Sex") + ylab("Count")
 
+school |> ggplot(aes(x = sex, fill = school)) + geom_bar(position = "dodge") + labs(title = "Student Population of Two Different Schools") + xlab("Sex") + ylab("Count")
 ```
