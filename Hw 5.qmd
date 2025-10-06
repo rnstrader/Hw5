@@ -111,7 +111,9 @@ schoolplot |> ggplot(aes(x = values, fill = interaction(school, variable))) + ge
 schoolplot |> ggplot(aes(x = values, y = variable, color = school)) + geom_boxplot() + labs(title = "G3 Grades by School", x = "Grade", y = "Class")
 ```
 
-Two scatter plots relating a G3 variable to other numeric variables, one is G3.x vs absences.x, the other G3.y vs absences.y. Each plot is colored by school.
+Two scatter plots relating a G3 variable to other numeric variables, one is G3.x vs absences.x, the other G3.y vs absences.y. Each plot is colored by school. From this we can also see the visualization of the trend noted previously, where the .y class (class 2 as named for convenience) appears to have better grades for G3 than the .x class (or class 1). We can also observe in this plot that there are fewer students with more than 20 absences in class 2 compared to class 1, which might help explain the difference
 ```{r}
+school |> ggplot(aes(x = absences.x, y = G3.x, color = school)) + geom_point() + labs(title = "G3 Grades vs Number of Absences at each school (Class 1)", x = "Absences", y = "Grade")
 
+school |> ggplot(aes(x = absences.y, y = G3.y, color = school)) + geom_point() + labs(title = "G3 Grades vs Number of Absences at each school (Class 2)", x = "Absences", y = "Grade")
 ```
