@@ -100,3 +100,9 @@ Creating a correlation matrix between all of the numeric variables included in t
 ```{r}
 cor(school[,c("age", "absences.x", "absences.y", "G1.x", "G1.y", "G2.x", "G2.y", "G3.x", "G3.y")], use = "complete.obs")
 ```
+
+Creating a histogram, kernel density plot, and boxplot for two numeric variables, G3.x and G3.y, across the categorical variable school. Based on this histogram, it seems that grades in the G3.y group were skewed slightly higher than those in the G3.x group, which have more lower values. 
+```{r}
+schoolplot <- school |> select(school, G3.x, G3.y) |> pivot_longer(cols = c(G3.x, G3.y), names_to = "variable", values_to = "values")
+schoolplot |> ggplot(aes(x = values, fill = interaction(school, variable))) + geom_histogram() + labs(title = "G3 Grades by School", x = "Grade", y = "Count")
+```
