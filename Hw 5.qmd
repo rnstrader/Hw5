@@ -120,5 +120,10 @@ school |> ggplot(aes(x = absences.y, y = G3.y, color = school)) + geom_point() +
 
 Creating a similar scatter plot to above but faceting by sex. This plot suggests that male absences are tightly clustered when compared to female absences, and grades for them are only slightly skewed higher.
 ```{r}
-school |> ggplot(aes(x = absences.x, y = G3.x, color = school)) + geom_point() + facet_wrap(~ sex) + labs(title = "G3 Grades at each school by sex", x = "Absences", y = "Grade")
+school |> ggplot(aes(x = absences.x, y = G3.x, color = school)) + geom_point() + facet_wrap(~ sex) + labs(title = "G3 Grades vs Absences at each school by sex", x = "Absences", y = "Grade")
+```
+
+Creating a similar scatter plot but adding yet another variable to facet with, this time both sex and address. One interesting observation from this graph is that it appears that the distribution of grades between urban and rural students is consistent, despite the vast difference in number of urban students vs rural ones.
+```{r}
+school |> ggplot(aes(x = absences.x, y = G3.x, color = school)) + geom_point() + facet_grid(sex ~ address) + labs(title = "G3 Grades vs Absences at each School by Sex and Address", x = "Absences", y = "Grade")
 ```
