@@ -57,24 +57,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Hw 5_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Hw 5_files/libs/quarto-html/quarto.js"></script>
-<script src="Hw 5_files/libs/quarto-html/popper.min.js"></script>
-<script src="Hw 5_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Hw 5_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Hw 5_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Hw 5_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Hw 5_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Hw 5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Hw 5_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d4be639c637f3db3c684c66cefad7e0c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -3062,10 +3099,165 @@ dbl (16): age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime...
 </section>
 <section id="numeric-variables" class="level2">
 <h2 class="anchored" data-anchor-id="numeric-variables">Numeric Variables</h2>
+<p>Finding measures of center and spread for age, absences, and one G3 variable. Repeating to subset the data. This table reveals that the measures of center and spread for all of these variables match very closely between the overall data set and when subsetted by looking at only the Gabriel Pereira school. This makes sense as we observed previously that GP has the greatest share of the student population by far.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"absences.x"</span>, <span class="st">"absences.y"</span>, <span class="st">"G3.x"</span>), <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> mean, <span class="st">"median"</span> <span class="ot">=</span> median, <span class="st">"SD"</span> <span class="ot">=</span> sd), <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  mean_age median_age SD_age mean_absences.x median_absences.x SD_absences.x
+     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;         &lt;dbl&gt;
+1     16.5         16   1.14            5.41                 4          7.84
+# ℹ 6 more variables: mean_absences.y &lt;dbl&gt;, median_absences.y &lt;dbl&gt;,
+#   SD_absences.y &lt;dbl&gt;, mean_G3.x &lt;dbl&gt;, median_G3.x &lt;dbl&gt;, SD_G3.x &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">filter</span>(school <span class="sc">==</span> <span class="st">"GP"</span>) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"absences.x"</span>, <span class="st">"absences.y"</span>, <span class="st">"G3.x"</span>), <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> mean, <span class="st">"median"</span> <span class="ot">=</span> median, <span class="st">"SD"</span> <span class="ot">=</span> sd), <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  mean_age median_age SD_age mean_absences.x median_absences.x SD_absences.x
+     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;         &lt;dbl&gt;
+1     16.4         16   1.10            5.64                 4          8.10
+# ℹ 6 more variables: mean_absences.y &lt;dbl&gt;, median_absences.y &lt;dbl&gt;,
+#   SD_absences.y &lt;dbl&gt;, mean_G3.x &lt;dbl&gt;, median_G3.x &lt;dbl&gt;, SD_G3.x &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Finding measures of center and spread across a single grouping variable. One interesting thing revealed through the table is that it appears that female students have slightly more absences on average than male students, despite having the same median, and the number of absences across each population is more spread out for women than for men.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"absences.x"</span>, <span class="st">"absences.y"</span>, <span class="st">"G3.x"</span>), <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> mean, <span class="st">"median"</span> <span class="ot">=</span> median, <span class="st">"SD"</span> <span class="ot">=</span> sd), <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 13
+  sex   mean_age median_age SD_age mean_absences.x median_absences.x
+  &lt;fct&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;
+1 F         16.6         17   1.06            5.78                 4
+2 M         16.4         16   1.22            4.97                 4
+# ℹ 7 more variables: SD_absences.x &lt;dbl&gt;, mean_absences.y &lt;dbl&gt;,
+#   median_absences.y &lt;dbl&gt;, SD_absences.y &lt;dbl&gt;, mean_G3.x &lt;dbl&gt;,
+#   median_G3.x &lt;dbl&gt;, SD_G3.x &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Finding measures of center and spread across two grouping variables. One interesting thing revealed by this table is that for both sexes, students at the Mousinho da Silveira school are slightly older than students at Gabriel Pereira, yet their G3 grades are lower.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sex, school) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"absences.x"</span>, <span class="st">"absences.y"</span>, <span class="st">"G3.x"</span>), <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> mean, <span class="st">"median"</span> <span class="ot">=</span> median, <span class="st">"SD"</span> <span class="ot">=</span> sd), <span class="at">.names =</span> <span class="st">"{.fn}_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'sex'. You can override using the `.groups`
+argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 14
+# Groups:   sex [2]
+  sex   school mean_age median_age SD_age mean_absences.x median_absences.x
+  &lt;fct&gt; &lt;fct&gt;     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;
+1 F     GP         16.5         16  1.03             6.12               4  
+2 F     MS         17.7         18  0.577            3.33               0  
+3 M     GP         16.3         16  1.16             5.10               4  
+4 M     MS         18           18  0.603            3.58               3.5
+# ℹ 7 more variables: SD_absences.x &lt;dbl&gt;, mean_absences.y &lt;dbl&gt;,
+#   median_absences.y &lt;dbl&gt;, SD_absences.y &lt;dbl&gt;, mean_G3.x &lt;dbl&gt;,
+#   median_G3.x &lt;dbl&gt;, SD_G3.x &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Creating a correlation matrix between all of the numeric variables included in the school data object. Several observations can be gleaned from this. Some are expected, such as absences trending negatively with all grade variables, whereas some I did not think to expect, such as age trending negatively with most of the grade variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(school[,<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"absences.x"</span>, <span class="st">"absences.y"</span>, <span class="st">"G1.x"</span>, <span class="st">"G1.y"</span>, <span class="st">"G2.x"</span>, <span class="st">"G2.y"</span>, <span class="st">"G3.x"</span>, <span class="st">"G3.y"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    age  absences.x  absences.y        G1.x        G1.y
+age         1.000000000  0.14392517  0.04733182 -0.11037935 -0.05054968
+absences.x  0.143925170  1.00000000  0.56381559 -0.06946116 -0.09247761
+absences.y  0.047331821  0.56381559  1.00000000 -0.08760610 -0.09864117
+G1.x       -0.110379348 -0.06946116 -0.08760610  1.00000000  0.59293522
+G1.y       -0.050549678 -0.09247761 -0.09864117  0.59293522  1.00000000
+G2.x       -0.186187399 -0.07580245 -0.12636236  0.86588796  0.54300736
+G2.y        0.029366456 -0.14516402 -0.12070727  0.59517224  0.88415041
+G3.x       -0.206031862 -0.02811847 -0.11664046  0.81859418  0.52288461
+G3.y       -0.009103257 -0.13572638 -0.07145201  0.54388734  0.82541432
+                  G2.x        G2.y        G3.x         G3.y
+age        -0.18618740  0.02936646 -0.20603186 -0.009103257
+absences.x -0.07580245 -0.14516402 -0.02811847 -0.135726385
+absences.y -0.12636236 -0.12070727 -0.11664046 -0.071452010
+G1.x        0.86588796  0.59517224  0.81859418  0.543887345
+G1.y        0.54300736  0.88415041  0.52288461  0.825414320
+G2.x        1.00000000  0.56521350  0.91357599  0.496032649
+G2.y        0.56521350  1.00000000  0.54545279  0.894309821
+G3.x        0.91357599  0.54545279  1.00000000  0.475956497
+G3.y        0.49603265  0.89430982  0.47595650  1.000000000</code></pre>
+</div>
+</div>
+<p>Creating a histogram, kernel density plot, and boxplot for two numeric variables, G3.x and G3.y, across the categorical variable school. Based on these plots, it seems that grades in the G3.y group were skewed slightly higher than those in the G3.x group, which have lower values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>schoolplot <span class="ot">&lt;-</span> school <span class="sc">|&gt;</span> <span class="fu">select</span>(school, G3.x, G3.y) <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(G3.x, G3.y), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"values"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>schoolplot <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> values, <span class="at">fill =</span> <span class="fu">interaction</span>(school, variable))) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades by School"</span>, <span class="at">x =</span> <span class="st">"Grade"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>schoolplot <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> values, <span class="at">fill =</span> <span class="fu">interaction</span>(school, variable))) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades by School"</span>, <span class="at">x =</span> <span class="st">"Grade"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>schoolplot <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> values, <span class="at">y =</span> variable, <span class="at">color =</span> school)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades by School"</span>, <span class="at">x =</span> <span class="st">"Grade"</span>, <span class="at">y =</span> <span class="st">"Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Two scatter plots relating a G3 variable to other numeric variables, one is G3.x vs absences.x, the other G3.y vs absences.y. Each plot is colored by school. From this we can also see the visualization of the trend noted previously, where the .y class (class 2 as named for convenience) appears to have better grades for G3 than the .x class (or class 1). We can also observe in this plot that there are fewer students with more than 20 absences in class 2 compared to class 1, which might help explain the difference.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> absences.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades vs Number of Absences at each school (Class 1)"</span>, <span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> absences.y, <span class="at">y =</span> G3.y, <span class="at">color =</span> school)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades vs Number of Absences at each school (Class 2)"</span>, <span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Creating a similar scatter plot to above but faceting by sex. This plot suggests that male absences are tightly clustered when compared to female absences, and grades for them are only slightly skewed higher.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> absences.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> sex) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades vs Absences at each school by sex"</span>, <span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Creating a similar scatter plot but adding yet another variable to facet with, this time both sex and address. One interesting observation from this graph is that it appears that the distribution of grades between urban and rural students is consistent, despite the vast difference in number of urban students vs rural ones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>school <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> absences.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(sex <span class="sc">~</span> address) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"G3 Grades vs Absences at each School by Sex and Address"</span>, <span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hw-5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
