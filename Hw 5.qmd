@@ -91,7 +91,12 @@ Finding measures of center and spread across a single grouping variable. One int
 school |> group_by(sex) |> summarize(across(c("age", "absences.x", "absences.y", "G3.x"), list("mean" = mean, "median" = median, "SD" = sd), .names = "{.fn}_{.col}"))
 ```
 
-
+Finding measures of center and spread across two grouping variables. One interesting thing revealed by this table is that for both sexes, students at the Mousinho da Silveira school are slightly older than students at Gabriel Pereira, yet their G3 grades are lower.
 ```{r}
+school |> group_by(sex, school) |> summarize(across(c("age", "absences.x", "absences.y", "G3.x"), list("mean" = mean, "median" = median, "SD" = sd), .names = "{.fn}_{.col}"))
+```
 
+Creating a correlation matrix between all of the numeric variables included in the school data object. Several observations can be gleaned from this. Some are expected, such as absences trending negatively with all grade variables, whereas some I did not think to expect, such as age trending negatively with most of the grade variables.
+```{r}
+cor(school[,c("age", "absences.x", "absences.y", "G1.x", "G1.y", "G2.x", "G2.y", "G3.x", "G3.y")], use = "complete.obs")
 ```
